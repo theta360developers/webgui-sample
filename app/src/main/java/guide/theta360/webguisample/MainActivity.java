@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import com.samskivert.mustache.Mustache;
 import guide.theta360.webguisample.R;
@@ -108,8 +109,13 @@ public class MainActivity extends PluginActivity {
         SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = data.edit();
         editor.putString(PREFERENCE_KEY_COLOR, ledColor.toString());
-        editor.putString("bracket", "7");
+        editor.apply();
+    }
 
+    private void saveBracket(String bracketNumber) {
+        SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = data.edit();
+        editor.putString("bracket", bracketNumber);
         editor.apply();
     }
 
@@ -199,6 +205,37 @@ public class MainActivity extends PluginActivity {
                 return;
             }
 
+            /*
+            Test section to receive bracket parameter and display an LED for feedback
+            7 brackets: camera LED will light
+            9 brackets: Video LED will light
+            13 brackets: LIVE LED will light
+             */
+
+            String bracket = parameters.get("bracket").get(0);
+            saveBracket(bracket);
+            Log.d("VFX", bracket);
+
+            if (bracket.equals("7")) {
+                notificationLedShow(LedTarget.LED4);
+                Log.d("VFX", "saving bracket 7");
+                notificationLedHide(LedTarget.LED5);
+                notificationLedHide(LedTarget.LED6);
+            }
+
+            if (bracket.equals("9")) {
+                notificationLedHide(LedTarget.LED4);
+                notificationLedShow(LedTarget.LED5);
+                notificationLedHide(LedTarget.LED6);
+                Log.d("VFX", "saving parameter 9 ");
+            }
+
+            if (bracket.equals("13")) {
+                notificationLedHide(LedTarget.LED4);
+                notificationLedHide(LedTarget.LED5);
+                notificationLedShow(LedTarget.LED6);
+                Log.d("VFX", "saving parameter 9 ");
+            }
 
             String color = parameters.get(HTML_SELECTOR_ID_COLOR).get(0);
             LedColor ledColor = LedColor.getValue(color);
