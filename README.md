@@ -1,7 +1,7 @@
 # WebGUI Community Tutorial
 
-We are building a community tutorial to that shows
-how to add a WebGUI RICOH THETA plug-ins.
+We are building a community tutorial that shows
+how to add a WebGUI to RICOH THETA plug-ins.
 
 We are using the tutorial from RICOH's 
 [@3215](https://qiita.com/3215) as a base. His tutorial was translated
