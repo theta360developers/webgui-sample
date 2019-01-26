@@ -132,6 +132,7 @@ public class MainActivity extends PluginActivity {
         private static final String INDEX_TEMPLATE_FILE_NAME = "index_template.html";
         private static final String INDEX_OUTPUT_FILE_NAME = "index_out.html";
         private static final String HTML_SELECTOR_ID_COLOR = "color";
+        private static final String HTML_SELECTOR_ID_BRACKET = "bracket";
 
         public WebServer(Context context) {
             super(PORT);
@@ -194,6 +195,7 @@ public class MainActivity extends PluginActivity {
             switch (uri) {
                 case "/":
                     this.updateLedColor(parameters);
+                    this.updateBracket(parameters);
                     return;
                 default:
                     return;
@@ -202,6 +204,17 @@ public class MainActivity extends PluginActivity {
 
         private void updateLedColor(Map<String, List<String>> parameters) {
             if (parameters.get(HTML_SELECTOR_ID_COLOR) == null || parameters.get(HTML_SELECTOR_ID_COLOR).isEmpty()) {
+                return;
+            }
+
+            String color = parameters.get(HTML_SELECTOR_ID_COLOR).get(0);
+            LedColor ledColor = LedColor.getValue(color);
+            notificationLedBlink(LedTarget.LED3, ledColor, 1000);
+            saveLedColor(ledColor);
+        }
+
+        private void updateBracket(Map<String, List<String>> parameters) {
+            if (parameters.get(HTML_SELECTOR_ID_BRACKET) == null || parameters.get(HTML_SELECTOR_ID_BRACKET).isEmpty()) {
                 return;
             }
 
@@ -236,12 +249,7 @@ public class MainActivity extends PluginActivity {
                 notificationLedShow(LedTarget.LED6);
                 Log.d("VFX", "saving parameter 9 ");
             }
-
-            String color = parameters.get(HTML_SELECTOR_ID_COLOR).get(0);
-            LedColor ledColor = LedColor.getValue(color);
-            notificationLedBlink(LedTarget.LED3, ledColor, 1000);
-            saveLedColor(ledColor);
-        }
+     }
 
         private Map<String, Object> generateIndexHtmlContext() {
             Map<String, Object> context = new HashMap<>();
