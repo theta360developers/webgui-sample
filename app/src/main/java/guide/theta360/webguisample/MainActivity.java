@@ -225,13 +225,13 @@ public class MainActivity extends PluginActivity {
             13 brackets: LIVE LED will light
              */
 
-            String bracket = parameters.get("bracket").get(0);
+            String bracket = parameters.get(HTML_SELECTOR_ID_BRACKET).get(0);
             saveBracket(bracket);
             Log.d("VFX", bracket);
 
             if (bracket.equals("7")) {
                 notificationLedShow(LedTarget.LED4);
-                Log.d("VFX", "saving bracket 7");
+                Log.d("VFX", "saving parameter 7 brackets");
                 notificationLedHide(LedTarget.LED5);
                 notificationLedHide(LedTarget.LED6);
             }
@@ -240,14 +240,14 @@ public class MainActivity extends PluginActivity {
                 notificationLedHide(LedTarget.LED4);
                 notificationLedShow(LedTarget.LED5);
                 notificationLedHide(LedTarget.LED6);
-                Log.d("VFX", "saving parameter 9 ");
+                Log.d("VFX", "saving parameter 9 brackets");
             }
 
             if (bracket.equals("13")) {
                 notificationLedHide(LedTarget.LED4);
                 notificationLedHide(LedTarget.LED5);
                 notificationLedShow(LedTarget.LED6);
-                Log.d("VFX", "saving parameter 9 ");
+                Log.d("VFX", "saving parameter 13 brackets");
             }
      }
 
