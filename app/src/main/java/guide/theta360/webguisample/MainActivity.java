@@ -31,6 +31,7 @@ public class MainActivity extends PluginActivity {
     private Context context;
     private WebServer webServer;
     private static final String PREFERENCE_KEY_COLOR = "color";
+    private static final String PREFERENCE_KEY_BRACKET = "bracket";
 
     private TakePictureTask.Callback mTakePictureTaskCallback = new TakePictureTask.Callback() {
         @Override
@@ -45,6 +46,7 @@ public class MainActivity extends PluginActivity {
         setContentView(R.layout.activity_main);
 
         this.context = getApplicationContext();
+        loadBracket();
         notificationLedBlink(LedTarget.LED3, this.loadLedColor(), 1000);
         this.webServer = new WebServer(this.context);
         try {
@@ -123,6 +125,13 @@ public class MainActivity extends PluginActivity {
         SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(context);
         String savedColor = data.getString(PREFERENCE_KEY_COLOR, LedColor.BLUE.toString());
         return LedColor.getValue(savedColor);
+    }
+
+    private String loadBracket() {
+        SharedPreferences data = PreferenceManager.getDefaultSharedPreferences(context);
+        String savedBracket = data.getString(PREFERENCE_KEY_BRACKET, "");
+        Log.d("VFX","loading bracket value: " + savedBracket);
+        return savedBracket;
     }
 
     private class WebServer extends NanoHTTPD {
@@ -227,7 +236,7 @@ public class MainActivity extends PluginActivity {
 
             String bracket = parameters.get(HTML_SELECTOR_ID_BRACKET).get(0);
             saveBracket(bracket);
-            Log.d("VFX", bracket);
+            Log.d("VFX", "received parameter from web UI: " + bracket);
 
             if (bracket.equals("7")) {
                 notificationLedShow(LedTarget.LED4);
