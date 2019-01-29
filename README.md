@@ -9,3 +9,5 @@ into English by the community.  Please see the discussion at the link
 below to contribute.
 
 https://community.theta360.guide/t/creating-a-webui-for-your-theta-plug-in/4054
+
+![Analytics](https://ga-beacon.appspot.com/UA-73311422-5/webgui-sample)
