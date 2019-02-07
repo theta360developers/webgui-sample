@@ -6,7 +6,7 @@ This plug-in is used for testing the functionality of the camera in a sports set
 
 This screen shot shows how the web page appears and the main functionality that can be configured by the user.
 
-![main screenshot](img/slapshot-camera-tester-webgui-screenshot.png)
+![main screenshot](img/slapshot-camera-tester-webgui-screenshot.jpg)
 
 We are using the tutorial from RICOH's 
 [@3215](https://qiita.com/3215) as a base. His tutorial was translated
