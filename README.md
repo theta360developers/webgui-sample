@@ -1,7 +1,7 @@
-# WebGUI Community Tutorial
+# Slapshot Camera Tester
 
-We are building a community tutorial that shows
-how to add a WebGUI to RICOH THETA plug-ins.
+This plug-in is used for testing the functionality of the camera in a sports setting. I like ice hockey. I am using a web page to configure and use the camera. This takes advantage of the WebGUI that can be used with RICOH THETA plug-ins.
+
 
 We are using the tutorial from RICOH's 
 [@3215](https://qiita.com/3215) as a base. His tutorial was translated
