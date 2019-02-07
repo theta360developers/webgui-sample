@@ -2,6 +2,7 @@ package guide.theta360.slapshot;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -142,6 +143,7 @@ public class MainActivity extends PluginActivity {
         private static final String INDEX_OUTPUT_FILE_NAME = "index_out.html";
         private static final String HTML_SELECTOR_ID_COLOR = "color";
         private static final String HTML_SELECTOR_ID_BRACKET = "bracket";
+        private static final String HTML_SELECTOR_ID_TAKEPICTURE = "takepicture";
 
         public WebServer(Context context) {
             super(PORT);
@@ -205,6 +207,7 @@ public class MainActivity extends PluginActivity {
                 case "/":
                     this.updateLedColor(parameters);
                     this.updateBracket(parameters);
+                    this.takePicture(parameters);
                     return;
                 default:
                     return;
@@ -220,6 +223,15 @@ public class MainActivity extends PluginActivity {
             LedColor ledColor = LedColor.getValue(color);
             notificationLedBlink(LedTarget.LED3, ledColor, 1000);
             saveLedColor(ledColor);
+        }
+
+        private void takePicture(Map<String, List<String>> parameters) {
+            if (parameters.get(HTML_SELECTOR_ID_TAKEPICTURE) == null || parameters.get(HTML_SELECTOR_ID_COLOR).isEmpty()) {
+                return;
+            }
+            Log.d("SLAP", "Taking Picture");
+            Camera camera = new Camera();
+            
         }
 
         private void updateBracket(Map<String, List<String>> parameters) {
